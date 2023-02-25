@@ -124,4 +124,9 @@ import java.util.Scanner;
               }   break;
           }
       }
+      void deleteContact(String name){
+              int contactIndex = getContactIndex(name);
+              contactList.remove(contactIndex);
+       }
+
   }
