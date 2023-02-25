@@ -14,7 +14,7 @@ public class Main {
         System.out.println("Press 2 to display contact");
         System.out.println("Press 3 to edit contact");
         System.out.println("Press 4 to delete contact");
-        System.out.println("Press 5 to exit successfully");
+        System.out.println("Press 5 to exit ");
         int input = objec.nextInt();
         switch (input){
             case 1:
