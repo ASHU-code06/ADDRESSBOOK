@@ -5,41 +5,46 @@ import java.util.Scanner;
   class Contacts {
         public int contactId;
        ArrayList<ContactModel> contactList = new ArrayList<ContactModel>();
-       public void addContact(){
+       public void addContact() {
            //Method for creating contacts only
-           ContactModel contactModel = new ContactModel();//creating object of other class
-           Scanner input = new Scanner(System.in);
-           Random generatingId = new Random();//Using random function to generate contact id
-           contactModel.contactId = String.valueOf(generatingId.nextInt(200)+100);
-           System.out.println("Enter your details as follows");
-           System.out.println("Enter first name");
-           String firstName = input.nextLine();
-           contactModel.setFirstName(firstName);
-           System.out.println("Enter last name");
-           String lastName = input.nextLine();
-           contactModel.setLastName(lastName);
-           System.out.println("Enter Address");
-           String address = input.nextLine();
-           contactModel.setAddress(address);
-           System.out.println("Enter City");
-           String city = input.nextLine();
-           contactModel.setCity(city);
-           System.out.println("Enter State");
-           String state = input.nextLine();
-           contactModel.setState(state);
-           System.out.println("Enter ZIP");
-           String zip = input.nextLine();
-           contactModel.setZip(zip);
-           System.out.println("Enter PhoneNumber");
-           String phoneNumber = input.nextLine();
-           contactModel.setPhoneNumber(phoneNumber);
-           System.out.println("Enter email ");
-           String email = input.nextLine();
-           contactModel.setEmail(email);
-           System.out.println("Your ContactId is "+contactModel.contactId);
+           System.out.println("How may contacts you want to add ? ");
+           int numOfContacts = new Scanner(System.in).nextInt();
+
+           for (int i = 1; i <= numOfContacts; i++) {
+               ContactModel contactModel = new ContactModel();//creating object of other class
+               Scanner input = new Scanner(System.in);
+               Random generatingId = new Random();//Using random function to generate contact id
+               contactModel.contactId = String.valueOf(generatingId.nextInt(200) + 100);
+               System.out.println("Enter your details as follows");
+               System.out.println("Enter first name");
+               String firstName = input.nextLine();
+               contactModel.setFirstName(firstName);
+               System.out.println("Enter last name");
+               String lastName = input.nextLine();
+               contactModel.setLastName(lastName);
+               System.out.println("Enter Address");
+               String address = input.nextLine();
+               contactModel.setAddress(address);
+               System.out.println("Enter City");
+               String city = input.nextLine();
+               contactModel.setCity(city);
+               System.out.println("Enter State");
+               String state = input.nextLine();
+               contactModel.setState(state);
+               System.out.println("Enter ZIP");
+               String zip = input.nextLine();
+               contactModel.setZip(zip);
+               System.out.println("Enter PhoneNumber");
+               String phoneNumber = input.nextLine();
+               contactModel.setPhoneNumber(phoneNumber);
+               System.out.println("Enter email ");
+               String email = input.nextLine();
+               contactModel.setEmail(email);
+               System.out.println("Your ContactId is " + contactModel.contactId);
 
 
-           contactList.add(contactModel);//Added contact details in contactModel
+               contactList.add(contactModel);//Added contact details in contactModel
+           }
        }
        void displayContact(){
            for (int i=0;i<contactList.size();i++){
