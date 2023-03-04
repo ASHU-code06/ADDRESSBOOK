@@ -13,40 +13,49 @@ import java.util.Scanner;
            contactModel.contactId = String.valueOf(generatingId.nextInt(200)+100);
            System.out.println("Enter your details as follows");
            System.out.println("Enter first name");
-           contactModel.firstName = input.nextLine();
+           String firstName = input.nextLine();
+           contactModel.setFirstName(firstName);
            System.out.println("Enter last name");
-           contactModel.lastName = input.nextLine();
+           String lastName = input.nextLine();
+           contactModel.setLastName(lastName);
            System.out.println("Enter Address");
-           contactModel.address = input.nextLine();
+           String address = input.nextLine();
+           contactModel.setAddress(address);
            System.out.println("Enter City");
-           contactModel.city = input.nextLine();
+           String city = input.nextLine();
+           contactModel.setCity(city);
            System.out.println("Enter State");
-           contactModel.state = input.nextLine();
+           String state = input.nextLine();
+           contactModel.setState(state);
            System.out.println("Enter ZIP");
-           contactModel.zip = input.nextLine();
+           String zip = input.nextLine();
+           contactModel.setZip(zip);
            System.out.println("Enter PhoneNumber");
-           contactModel.phoneNumber = input.nextLine();
+           String phoneNumber = input.nextLine();
+           contactModel.setPhoneNumber(phoneNumber);
            System.out.println("Enter email ");
-           contactModel.email = input.nextLine();
+           String email = input.nextLine();
+           contactModel.setEmail(email);
            System.out.println("Your ContactId is "+contactModel.contactId);
+
 
            contactList.add(contactModel);//Added contact details in contactModel
        }
        void displayContact(){
            for (int i=0;i<contactList.size();i++){
                 ContactModel obj = contactList.get(i);
-               System.out.println("Name : "+obj.firstName+" "+obj.lastName);
-               System.out.println("Address : "+obj.address);
-               System.out.println("City : "+obj.city);
-               System.out.println("State : "+obj.state);
-               System.out.println("zip : "+obj.zip);
-               System.out.println("Phone-Number : "+obj.phoneNumber);
-               System.out.println("Email : "+obj.email);
+               System.out.println("Name : "+obj.getFirstName()+" "+obj.getLastName());
+               System.out.println("Address : "+obj.getAddress());
+               System.out.println("City : "+obj.getCity());
+               System.out.println("State : "+obj.getState());
+               System.out.println("zip : "+obj.getZip());
+               System.out.println("Phone-Number : "+obj.getPhoneNumber());
+               System.out.println("Email : "+obj.getEmail());
            }
        }
       private int getContactIndex(String name) {
           for (int i = 0; i < contactList.size(); i++) {
-              if (contactList.get(i).firstName.equals(name)) {
+              if (contactList.get(i).getFirstName().equals(name)) {
                   return i;
               }
           }
@@ -79,42 +88,42 @@ import java.util.Scanner;
                   case 1:
                       System.out.println("Enter First Name: ");
                       String firstName = (new Scanner(System.in)).nextLine();
-                      contactList.get(contactIndex).firstName = firstName;
+                      contactList.get(contactIndex).setFirstName(firstName);
                       break;
                   case 2:
                       System.out.println("Enter Last Name: ");
                       String lastName = (new Scanner(System.in)).nextLine();
-                      contactList.get(contactIndex).lastName = lastName;
+                      contactList.get(contactIndex).setLastName(lastName);
                       break;
                   case 3:
                       System.out.println("Enter Address: ");
                       String address = (new Scanner(System.in)).nextLine();
-                      contactList.get(contactIndex).address = address;
+                      contactList.get(contactIndex).setAddress(address);
                       break;
                   case 4:
                       System.out.println("Enter City: ");
                       String city = (new Scanner(System.in)).nextLine();
-                      contactList.get(contactIndex).city = city;
+                      contactList.get(contactIndex).setCity(city);
                       break;
                   case 5:
                       System.out.println("Enter State: ");
                       String state = (new Scanner(System.in)).nextLine();
-                      contactList.get(contactIndex).state = state;
+                      contactList.get(contactIndex).setState(state);
                       break;
                   case 6:
                       System.out.println("Enter Zip: ");
                       String zip = (new Scanner(System.in)).nextLine();
-                      contactList.get(contactIndex).zip = zip;
+                      contactList.get(contactIndex).setZip(zip);
                       break;
                   case 7:
                       System.out.println("Enter PhoneNo: ");
                       String phoneNumber = (new Scanner(System.in)).nextLine();
-                      contactList.get(contactIndex).phoneNumber = phoneNumber;
+                      contactList.get(contactIndex).setPhoneNumber(phoneNumber);
                       break;
                   case 8:
                       System.out.println("Enter Email Id: ");
                       String email = (new Scanner(System.in)).nextLine();
-                      contactList.get(contactIndex).email = email;
+                      contactList.get(contactIndex).setEmail(email);
                       break;
                   case 9:
                       isEdit = false;
