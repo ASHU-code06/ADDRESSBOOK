@@ -2,43 +2,48 @@ package com.bridgelabz;
 import java.util.*;
 
 class AddressBook {
+    Scanner scanner = new Scanner(System.in);
     ArrayList<Address> contactList = new ArrayList<Address>();
-    public void addContact() { //Method for creating contacts only
+    Map<String,ArrayList<Address>> mapForAddressBook = new HashMap<>();
+    public void addContact(String nameOfAddressBook) { //Method for creating contacts only
         Map<String,Address> map = new HashMap<>();
-        System.out.println("Enter name of address book");
+
 
         System.out.println("How may contacts you want to add ? ");
-        int numOfContacts = new Scanner(System.in).nextInt();
+        int numOfContacts = scanner.nextInt();
 
         for (int i = 0; i < numOfContacts; i++) {
             Address address = new Address();//creating object of other class
-            Scanner input = new Scanner(System.in);
             Random generatingId = new Random();//Using random function to generate contact id
             address.contactId = String.valueOf(generatingId.nextInt(200) + 100);
             System.out.println("Enter your details as follows");
             System.out.println("Enter first name");
-            String firstName = input.nextLine();
+            String firstName = scanner.next();
             address.setFirstName(firstName);
             System.out.println("Enter last name");
-            String lastName = input.nextLine();
+            String lastName = scanner.next();
+            if (map.containsKey(firstName.concat(lastName))) {
+                System.out.println("\nError : " + firstName + " " + lastName + " already exists on this address book.");
+                break;
+            }
             address.setLastName(lastName);
             System.out.println("Enter Address");
-            String PersonAddress = input.nextLine();
+            String PersonAddress = scanner.next();
             address.setAddressOfPerson(PersonAddress);
             System.out.println("Enter City");
-            String city = input.nextLine();
+            String city = scanner.next();
             address.setCity(city);
             System.out.println("Enter State");
-            String state = input.nextLine();
+            String state = scanner.next();
             address.setState(state);
             System.out.println("Enter ZIP");
-            String zip = input.nextLine();
+            String zip = scanner.next();
             address.setZip(zip);
             System.out.println("Enter PhoneNumber");
-            String phoneNumber = input.nextLine();
+            String phoneNumber = scanner.next();
             address.setPhoneNumber(phoneNumber);
             System.out.println("Enter email ");
-            String email = input.nextLine();
+            String email = scanner.next();
             address.setEmail(email);
             System.out.println("Your ContactId is " + address.contactId);
 
@@ -46,18 +51,18 @@ class AddressBook {
 
             //Calling constructor of address class and passing aguments
             Address data = new Address(firstName , lastName , PersonAddress ,  city , state , zip , phoneNumber , email);
-            if (map.containsKey(firstName.concat(lastName))) {
-                System.out.println("\nError : " + firstName + " " + lastName + " already exists on this address book.");
-                break;
-            }
             map.put(firstName.concat(lastName), data);
+            mapForAddressBook.put(nameOfAddressBook,contactList);
         }
     }
 
     void displayContact(){
        for(Address data : contactList){
            System.out.println(data.toString());;
-       }// to print the map and see output
+       }
+        for(Map.Entry<String,ArrayList<Address>> m : mapForAddressBook.entrySet()){
+            System.out.print(m.getKey()+ "   "+m.getValue());
+        }
    }
     private int getContactIndex(String name) {
         for (int i = 0; i < contactList.size(); i++) {

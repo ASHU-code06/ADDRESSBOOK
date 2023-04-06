@@ -22,8 +22,10 @@ public class Main {
         int input = object.nextInt();
         switch (input){
             case 1:
-                addressBook.addContact();
-                System.out.println("CONTACT ADDED !");
+                System.out.println("Enter name of address book");
+                String nameOfAddressBook = object.next();
+                addressBook.addContact(nameOfAddressBook);
+                System.out.println(" DONE !");
                 initiate();
                 break;
             case 2:
