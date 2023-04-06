@@ -1,28 +1,28 @@
 package com.bridgelabz;
 
-public class ContactModel {
+public class Address {
     public String contactId;
     private String firstName;
     private String lastName ;
-    private String address;
+    private String addressOf;
     private String city;
     private String state ;
     private String zip;
     private String phoneNumber;
     private String email;
-    public  ContactModel(){
+    public Address(){
         //default constructor
     }
-//    public ContactModel(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.address = address;
-//        this.city = city;
-//        this.state = state;
-//        this.zip = zip;
-//        this.phoneNumber = phoneNumber;
-//        this.email = email;
-//    }
+    public Address(String firstName, String lastName, String addressOf, String city, String state, String zip, String phoneNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.addressOf = addressOf;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -40,12 +40,12 @@ public class ContactModel {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddressOfPerson() {
+        return addressOf;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddressOfPerson(String addressOf) {
+        this.addressOf = addressOf;
     }
 
     public String getCity() {
@@ -87,4 +87,16 @@ public class ContactModel {
     public void setEmail(String email) {
         this.email = email;
     }
+    public String toString(){
+       return firstName+" "+lastName+"\n"+addressOf+"\n"+city+"\n"+state+" "+zip+"\n"+phoneNumber+"\n"+email;
+
+
+    }
+    public void display(){
+        System.out.println("\n First Name : " + firstName + "\n Last Name : " + lastName + "\n Address : " + addressOf
+                + "\n Email : " + email + "\n Phone No : " + phoneNumber + "\n Zip Code : " + zip + "\n City : " + city
+                + "\n State : " + state);
+        System.out.println("  ");
+    }
+
 }
