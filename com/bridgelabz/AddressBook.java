@@ -1,13 +1,14 @@
 package com.bridgelabz;
 import java.util.*;
+import java.util.stream.Collectors;
 
 class AddressBook {
     Scanner scanner = new Scanner(System.in);
     ArrayList<Address> contactList = new ArrayList<Address>();
     Map<String,ArrayList<Address>> mapForAddressBook = new HashMap<>();
+
     public void addContact(String nameOfAddressBook) { //Method for creating contacts only
         Map<String,Address> map = new HashMap<>();
-
 
         System.out.println("How may contacts you want to add ? ");
         int numOfContacts = scanner.nextInt();
@@ -27,6 +28,8 @@ class AddressBook {
                 break;
             }
             address.setLastName(lastName);
+            System.out.println("Enter Age");
+            int age = scanner.nextInt();
             System.out.println("Enter Address");
             String PersonAddress = scanner.next();
             address.setAddressOfPerson(PersonAddress);
@@ -49,10 +52,21 @@ class AddressBook {
 
             contactList.add(address);//Added contact details in list
 
-            //Calling constructor of address class and passing aguments
-            Address data = new Address(firstName , lastName , PersonAddress ,  city , state , zip , phoneNumber , email);
+            //Calling constructor of address class and passing arguments
+            Address data = new Address(firstName , lastName , age , PersonAddress ,  city , state , zip , phoneNumber , email);
             map.put(firstName.concat(lastName), data);
             mapForAddressBook.put(nameOfAddressBook,contactList);
+        }
+    }
+    void searchByCityOrState(){
+        //Address address = new Address();
+        System.out.println("Enter city");
+        String searchByCityOrState = scanner.next();
+
+        List <Address> list = contactList.stream().filter(cityName -> cityName.getCity().equals(searchByCityOrState)).collect(Collectors.toList()) /*alt+enter then tab(before semicolon)*/;
+
+        for (Address c : list ) {
+            System.out.println("Person details "+c.getFirstName()+" "+c.getLastName());
         }
     }
 
@@ -64,7 +78,7 @@ class AddressBook {
             System.out.print(m.getKey()+ "   "+m.getValue());
         }
    }
-    private int getContactIndex(String name) {
+    private int getContactIndex(String name) {//to check if contact exist or not
         for (int i = 0; i < contactList.size(); i++) {
             if (contactList.get(i).getFirstName().equals(name)) {
                 return i;

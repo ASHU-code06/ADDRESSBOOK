@@ -17,7 +17,8 @@ public class Main {
         System.out.println("Press 2 to display contact");
         System.out.println("Press 3 to edit contact");
         System.out.println("Press 4 to delete contact");
-        System.out.println("Press 5 to exit ");
+        System.out.println("Press 5 to search ");
+        System.out.println("Press 0 to exit ");
 
         int input = object.nextInt();
         switch (input){
@@ -39,6 +40,7 @@ public class Main {
                 addressBook.editContact(nameForEditContactDetails);
                 System.out.println("Contact edited successfully");
                 initiate();
+                break;
             case 4:
                 System.out.println("Enter Name for Delete Contact");
                 String contactNameForDelete = (new Scanner(System.in)).nextLine();
@@ -47,6 +49,10 @@ public class Main {
                 initiate();
                 break;
             case 5:
+                addressBook.displayContact();
+                addressBook.searchByCityOrState();
+                break;
+            case 0:
                 System.out.println("Exit successfully");
                 break;
             default:

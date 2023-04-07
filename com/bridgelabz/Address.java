@@ -4,18 +4,46 @@ public class Address {
     public String contactId;
     private String firstName;
     private String lastName ;
+    private int age ;
     private String addressOf;
     private String city;
     private String state ;
     private String zip;
     private String phoneNumber;
     private String email;
+
+
+    public String getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(String contactId) {
+        this.contactId = contactId;
+    }
+
+    public String getAddressOf() {
+        return addressOf;
+    }
+
+    public void setAddressOf(String addressOf) {
+        this.addressOf = addressOf;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public Address(){
         //default constructor
     }
-    public Address(String firstName, String lastName, String addressOf, String city, String state, String zip, String phoneNumber, String email) {
+    public Address(String firstName, String lastName,int age , String addressOf, String city, String state, String zip, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.age = age;
         this.addressOf = addressOf;
         this.city = city;
         this.state = state;
