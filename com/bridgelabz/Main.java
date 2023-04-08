@@ -36,7 +36,7 @@ public class Main {
                     initiate();
                     break;
                 case 2:
-                    System.out.println("AddressBook has following contacts");
+                    System.out.println("AddressBook has following contacts : ");
                     addressBook.displayContact();
                     initiate();
                     break;
