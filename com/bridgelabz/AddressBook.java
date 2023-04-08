@@ -62,6 +62,18 @@ class AddressBook {
             mapForAddressBook.put(nameOfAddressBook,contactList);
         }
     }
+    void sortTheEntries(){
+        System.out.println("sorted by city");
+        List <String> sortedByCity = contactList.stream().map(Value -> Value.getCity()).sorted().collect(Collectors.toList());
+        System.out.println(sortedByCity);
+        System.out.println("sorted by state");
+        List <String> sortedByState = contactList.stream().map(Value -> Value.getState()).sorted().collect(Collectors.toList());
+        System.out.println(sortedByState);
+        System.out.println("sorted by zip");
+        List <String> sortedByZip = contactList.stream().map(Value -> Value.getZip()).sorted().collect(Collectors.toList());
+        System.out.println(sortedByZip);
+
+    }
     void searchByCityOrState(){
         System.out.println("Enter city");
         String searchByCityOrState = scanner.next();
