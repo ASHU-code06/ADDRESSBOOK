@@ -70,7 +70,6 @@ class AddressBook {
             mapForAddressBook.put(nameOfAddressBook,contactList);
 
             writeIntoFile(nameOfAddressBook);
-
         }
     }
     void  writeIntoFile(String nameOfAddressBook){
