@@ -4,7 +4,7 @@ public class Address {
     public String contactId;
     private String firstName;
     private String lastName ;
-    private int age ;
+    private String age ;
     private String addressOf;
     private String city;
     private String state ;
@@ -29,18 +29,18 @@ public class Address {
         this.addressOf = addressOf;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
     public Address(){
         //default constructor
     }
-    public Address(String firstName, String lastName,int age , String addressOf, String city, String state, String zip, String phoneNumber, String email) {
+    public Address(String firstName, String lastName, String age , String addressOf, String city, String state, String zip, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

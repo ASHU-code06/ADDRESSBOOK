@@ -29,7 +29,7 @@ class AddressBook {
             }
             address.setLastName(lastName);
             System.out.println("Enter Age");
-            int age = scanner.nextInt();
+            String age = scanner.next();
             System.out.println("Enter Address");
             String PersonAddress = scanner.next();
             address.setAddressOfPerson(PersonAddress);
@@ -62,12 +62,15 @@ class AddressBook {
         //Address address = new Address();
         System.out.println("Enter city");
         String searchByCityOrState = scanner.next();
+        int countOfPersonsLiveInTheCity_Or_State = 0;
 
         List <Address> list = contactList.stream().filter(cityName -> cityName.getCity().equals(searchByCityOrState)).collect(Collectors.toList()) /*alt+enter then tab(before semicolon)*/;
 
         for (Address c : list ) {
-            System.out.println("Person details "+c.getFirstName()+" "+c.getLastName());
+            System.out.println("Person details "+c.getFirstName()+" "+c.getLastName()+" :  "+c.getPhoneNumber() );
+            countOfPersonsLiveInTheCity_Or_State++;
         }
+        System.out.println(countOfPersonsLiveInTheCity_Or_State+"  People belong to this city/state");
     }
 
     void displayContact(){

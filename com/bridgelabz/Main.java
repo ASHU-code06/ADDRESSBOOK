@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     Scanner object = new Scanner(System.in);
     AddressBook addressBook = new AddressBook();//created object of class Contacts
-    ArrayList<String> AddressBook = new ArrayList<>();
+
     public static void main(String args[]){
     Main main = new Main();//created object of Main class to call non-static method  of this class
     main.initiate();
@@ -14,7 +14,7 @@ public class Main {
     private void initiate(){
 
         System.out.println("Press 1 for add a Address book");
-        System.out.println("Press 2 to display contact");
+        System.out.println("Press 2 to display Address Book");
         System.out.println("Press 3 to edit contact");
         System.out.println("Press 4 to delete contact");
         System.out.println("Press 5 to search ");
