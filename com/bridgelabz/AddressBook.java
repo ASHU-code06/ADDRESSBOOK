@@ -1,6 +1,10 @@
 package com.bridgelabz;
+import com.sun.jdi.Value;
+
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class AddressBook {
     Scanner scanner = new Scanner(System.in);
@@ -59,7 +63,6 @@ class AddressBook {
         }
     }
     void searchByCityOrState(){
-        //Address address = new Address();
         System.out.println("Enter city");
         String searchByCityOrState = scanner.next();
         int countOfPersonsLiveInTheCity_Or_State = 0;
@@ -71,6 +74,12 @@ class AddressBook {
             countOfPersonsLiveInTheCity_Or_State++;
         }
         System.out.println(countOfPersonsLiveInTheCity_Or_State+"  People belong to this city/state");
+    }
+    void sortByAlbhabeticalOrder(){
+
+        System.out.println("Sorted : ");
+        List<String> sortedList =  contactList.stream().map(Value -> Value.getFirstName()).sorted().collect(Collectors.toList());
+        System.out.println(sortedList);
     }
 
     void displayContact(){

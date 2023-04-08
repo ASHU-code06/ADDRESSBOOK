@@ -17,7 +17,8 @@ public class Main {
         System.out.println("Press 2 to display Address Book");
         System.out.println("Press 3 to edit contact");
         System.out.println("Press 4 to delete contact");
-        System.out.println("Press 5 to search ");
+        System.out.println("Press 5 to search by city/state ");
+        System.out.println("Press 6 to sort person details in alphabetical order");
         System.out.println("Press 0 to exit ");
 
         int input = object.nextInt();
@@ -51,6 +52,9 @@ public class Main {
             case 5:
                 addressBook.displayContact();
                 addressBook.searchByCityOrState();
+                break;
+            case 6:
+                addressBook.sortByAlbhabeticalOrder();
                 break;
             case 0:
                 System.out.println("Exit successfully");
