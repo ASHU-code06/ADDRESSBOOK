@@ -20,6 +20,7 @@ public class Main {
             System.out.println("Press 5 to search by city/state ");
             System.out.println("Press 6 to sort person details in alphabetical order");
             System.out.println("Press 7 to sort the entries by city , state and ZIP");
+            System.out.println("Press 8 to read your entered AddressBook file");
             System.out.println("Press 0 to exit ");
 
             int input = object.nextInt();
@@ -62,6 +63,9 @@ public class Main {
                     break;
                 case 7:
                     addressBook.sortTheEntries();
+                    break;
+                case 8:
+                    addressBook.readIntoFile();
                     break;
                 default:
                     System.out.println("Invalid Input");
