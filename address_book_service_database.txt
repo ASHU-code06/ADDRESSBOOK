@@ -11,6 +11,8 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
+UC1 - Ability to create a Address Book Service DB
+
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -42,6 +44,8 @@ mysql> show databases;
 | world                |
 +----------------------+
 8 rows in set (0.00 sec)
+
+UC2 - Ability to create a Address Book Table with first and last names, address, city,state, zip, phone number and email as its attributes.
 
 mysql> create table address_book_service(id int NOT NULL AUTO_INCREMENT , firstname varchar(20) NOT NULL , lastname varchar(20) NOT NULL , primary key (id));
 ERROR 1046 (3D000): No database selected
@@ -143,6 +147,8 @@ mysql> describe address_book_service;
 +--------------+-------------+------+-----+---------+----------------+
 9 rows in set (0.00 sec)
 
+UC3 - Ability to insert new Contacts to Address Book
+
 mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email) values ('Aashish','Chauhan','Vindhayavasani','Kashipur','Uttarakhand','123456','123456789','abcd990@gmail.com');
 Query OK, 1 row affected (0.01 sec)
 
@@ -161,7 +167,7 @@ mysql> insert into address_book_service(firstname,lastname,address,city,state,zi
 Query OK, 1 row affected (0.00 sec)
 
 mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email) values ('Ravi','Sharma','Apna Ghar Colony','Kurukshetr','Harayana','951428','987591322','ravi@gmail.com');
-Query OK, 1 row affected (0.08 sec)
+Query OK, 1 row affected (0....08 sec)
 
 mysql> select * from address_book_service;
 +----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
@@ -189,6 +195,8 @@ mysql> select * from address_book_service;
 +----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
 5 rows in set (0.00 sec)
 
+UC4 - Ability to edit existing contact person using their name
+
 mysql> update address_book_service set lastname = 'Singh' where firstname = 'Aashish';
 Query OK, 1 row affected (0.01 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
@@ -205,6 +213,8 @@ mysql> select * from address_book_service;
 +----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
 5 rows in set (0.00 sec)
 
+ UC5 - Ability to delete a person using person's name
+
 mysql> delete from address_book_service where firstname = 'Jeera';
 Query OK, 1 row affected (0.00 sec)
 
@@ -218,6 +228,8 @@ mysql> select * from address_book_service;
 |  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com     |
 +----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
 4 rows in set (0.00 sec)
+
+UC6 - Ability to Retrieve Person belonging to a City or State from the Address Book.
 
 mysql> select * from address_book_service where city = 'Kasoli';
 +----+-----------+----------+-------------+--------+----------------+--------+--------------+------------------+
@@ -257,6 +269,8 @@ mysql> select * from address_book_service;
 |  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com |
 +----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+
 5 rows in set (0.00 sec)
+ 
+UC7 - Ability to understand the size of address book by City and State.
 
 mysql> select city , count(*) as total_persons from address_book_service group by city;
 +------------+---------------+
@@ -272,6 +286,8 @@ mysql> select city , count(*) as total_persons from address_book_service group b
 mysql> select city , count(*) as total_persons , group_cocat(name order by name asc) as albhatically_sorted_names from address_book_service group by city;
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by name asc) as albhatically_sorted_names from address_book_service group ' at line 1
 
+UC8 - Ability to retrieve entries sorted alphabetically by Person’s name for a given city
+
 mysql> select city , count(*) as total_persons , GROUP_CONCAT(firstname ORDER BY firstname asc) as sorted_names from address_book_service group by city;
 +------------+---------------+--------------+
 | city       | total_persons | sorted_names |
@@ -293,6 +309,10 @@ mysql> select city , count(*) as total_persons , GROUP_CONCAT(firstname ORDER BY
 | Moradabad  |             2 | Ashu,Mansi   |
 +------------+---------------+--------------+
 4 rows in set (0.00 sec)
+
+UC9 - Ability to identify each Address Book with name and Type.
+- Here the type could Family, Friends,Profession, etc
+- Alter Address Book to add name and type
 
 mysql> alter table address_book_service add column type VARCHAR(50);
 Query OK, 0 rows affected (0.03 sec)
@@ -376,6 +396,8 @@ mysql> select * from address_book_service;
 +----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
 6 rows in set (0.00 sec)
 
+UC10 - Ability to get number of contact persons i.e. count by type
+
 mysql> select type, count(*) as count_by_type from address_book_service group by type;
 +--------------+---------------+
 | type         | count_by_type |
@@ -436,11 +458,10 @@ mysql> select * from address_book_service;
 +----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
 6 rows in set (0.00 sec)
 
+UC11 - Ability to add person to both Friend and Family
+
 mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email,type) values ('geeta','Singh','Q Pocket','Meerut','UttarPradesh','221163','991234526','geetasingh@gmail.com','Family');
 Query OK, 1 row affected (0.01 sec)
-
-mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email,type) values ('Poonam','Kamboj','Vihar colony','Kalagarh','UttarPradesh','881116','123654526','kambojpoonam@gmail.com','Friend');
-ERROR 1406 (22001): Data too long for column 'email' at row 1
 mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email,type) values ('Poonam','Kamboj','Vihar colony','Kalagarh','UttarPradesh','881116','123654526','kamboj@gmail.com','Friend');
 Query OK, 1 row affected (0.00 sec)
 
