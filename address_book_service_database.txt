@@ -1,0 +1,490 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 23
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+UC1 - Ability to create a Address Book Service DB
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employeewage       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> create database Address_Book_Service;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| address_book_service |
+| employeewage         |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| sakila               |
+| sys                  |
+| world                |
++----------------------+
+8 rows in set (0.00 sec)
+
+UC2 - Ability to create a Address Book Table with first and last names, address, city,state, zip, phone number and email as its attributes.
+
+mysql> create table address_book_service(id int NOT NULL AUTO_INCREMENT , firstname varchar(20) NOT NULL , lastname varchar(20) NOT NULL , primary key (id));
+ERROR 1046 (3D000): No database selected
+mysql> select database();
++------------+
+| database() |
++------------+
+| NULL       |
++------------+
+1 row in set (0.00 sec)
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| address_book_service |
+| employeewage         |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| sakila               |
+| sys                  |
+| world                |
++----------------------+
+8 rows in set (0.00 sec)
+
+mysql> select database Address_Book_Service;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Address_Book_Service' at line 1
+
+mysql> use address_book_service;
+Database changed
+mysql> select database();
++----------------------+
+| database()           |
++----------------------+
+| address_book_service |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> create table address_book_service(id int NOT NULL AUTO_INCREMENT , firstname varchar(20) NOT NULL , lastname varchar(20) NOT NULL , address varchar(50) NOT NULL , city varchar(20) ,  primary key (id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> describe address_book_service
+    -> ;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| firstname | varchar(20) | NO   |     | NULL    |                |
+| lastname  | varchar(20) | NO   |     | NULL    |                |
+| address   | varchar(50) | NO   |     | NULL    |                |
+| city      | varchar(20) | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> alter table address_book_service add state char(20) NOT NULL ;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe address_book_service
+    -> ;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| firstname | varchar(20) | NO   |     | NULL    |                |
+| lastname  | varchar(20) | NO   |     | NULL    |                |
+| address   | varchar(50) | NO   |     | NULL    |                |
+| city      | varchar(20) | YES  |     | NULL    |                |
+| state     | char(20)    | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table address_book_service add zip varchar(10) NOT NULL ;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table address_book_service add phone_number varchar(12) NOT NULL ;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table address_book_service add email varchar(20) NOT NULL ;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe address_book_service;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id           | int         | NO   | PRI | NULL    | auto_increment |
+| firstname    | varchar(20) | NO   |     | NULL    |                |
+| lastname     | varchar(20) | NO   |     | NULL    |                |
+| address      | varchar(50) | NO   |     | NULL    |                |
+| city         | varchar(20) | YES  |     | NULL    |                |
+| state        | char(20)    | NO   |     | NULL    |                |
+| zip          | varchar(10) | NO   |     | NULL    |                |
+| phone_number | varchar(12) | NO   |     | NULL    |                |
+| email        | varchar(20) | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+UC3 - Ability to insert new Contacts to Address Book
+
+mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email) values ('Aashish','Chauhan','Vindhayavasani','Kashipur','Uttarakhand','123456','123456789','abcd990@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+-----------+---------------+--------+--------------+--------------------+
+| id | firstname | lastname | address          | city      | state         | zip    | phone_number | email              |
++----+-----------+----------+------------------+-----------+---------------+--------+--------------+--------------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad | Uttar Pradesh | 123456 | 123456789    | ashuc306@gmail.com |
+|  2 | Aashish   | Chauhan  | Vindhayavasani   | Kashipur  | Uttarakhand   | 123456 | 123456789    | abcd990@gmail.com  |
++----+-----------+----------+------------------+-----------+---------------+--------+--------------+--------------------+
+2 rows in set (0.00 sec)
+
+mysql>
+mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email) values ('Kuldeep','Rathore','Shiv Colony','Kasoli','Madhya Pradesh','896754','987654321','jeevan@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email) values ('Ravi','Sharma','Apna Ghar Colony','Kurukshetr','Harayana','951428','987591322','ravi@gmail.com');
+Query OK, 1 row affected (0....08 sec)
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email              |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com |
+|  2 | Aashish   | Chauhan  | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com  |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com   |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com     |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email) values ('Jeera','Mumbasa','Krishna Colony','Guwahati','Aassam','674123','701234964','aarti61@gmail.com');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email              |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com |
+|  2 | Aashish   | Chauhan  | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com  |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com   |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com     |
+|  5 | Jeera     | Mumbasa  | Krishna Colony   | Guwahati   | Aassam         | 674123 | 701234964    | aarti61@gmail.com  |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+5 rows in set (0.00 sec)
+
+UC4 - Ability to edit existing contact person using their name
+
+mysql> update address_book_service set lastname = 'Singh' where firstname = 'Aashish';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email              |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com  |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com   |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com     |
+|  5 | Jeera     | Mumbasa  | Krishna Colony   | Guwahati   | Aassam         | 674123 | 701234964    | aarti61@gmail.com  |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+5 rows in set (0.00 sec)
+
+ UC5 - Ability to delete a person using person's name
+
+mysql> delete from address_book_service where firstname = 'Jeera';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email              |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com  |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com   |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com     |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+--------------------+
+4 rows in set (0.00 sec)
+
+UC6 - Ability to Retrieve Person belonging to a City or State from the Address Book.
+
+mysql> select * from address_book_service where city = 'Kasoli';
++----+-----------+----------+-------------+--------+----------------+--------+--------------+------------------+
+| id | firstname | lastname | address     | city   | state          | zip    | phone_number | email            |
++----+-----------+----------+-------------+--------+----------------+--------+--------------+------------------+
+|  3 | Kuldeep   | Rathore  | Shiv Colony | Kasoli | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com |
++----+-----------+----------+-------------+--------+----------------+--------+--------------+------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email) values ('Mansi','Sahu','Fanta Colony','Moradabad','UttarPradesh','675863','701234911','mansisahu@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> describe address_book_service;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id           | int         | NO   | PRI | NULL    | auto_increment |
+| firstname    | varchar(20) | NO   |     | NULL    |                |
+| lastname     | varchar(20) | NO   |     | NULL    |                |
+| address      | varchar(50) | NO   |     | NULL    |                |
+| city         | varchar(20) | YES  |     | NULL    |                |
+| state        | char(20)    | NO   |     | NULL    |                |
+| zip          | varchar(10) | NO   |     | NULL    |                |
+| phone_number | varchar(12) | NO   |     | NULL    |                |
+| email        | varchar(20) | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email               |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com  |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com   |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com    |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com      |
+|  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+
+5 rows in set (0.00 sec)
+ 
+UC7 - Ability to understand the size of address book by City and State.
+
+mysql> select city , count(*) as total_persons from address_book_service group by city;
++------------+---------------+
+| city       | total_persons |
++------------+---------------+
+| Moradabad  |             2 |
+| Kashipur   |             1 |
+| Kasoli     |             1 |
+| Kurukshetr |             1 |
++------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select city , count(*) as total_persons , group_cocat(name order by name asc) as albhatically_sorted_names from address_book_service group by city;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by name asc) as albhatically_sorted_names from address_book_service group ' at line 1
+
+UC8 - Ability to retrieve entries sorted alphabetically by Person’s name for a given city
+
+mysql> select city , count(*) as total_persons , GROUP_CONCAT(firstname ORDER BY firstname asc) as sorted_names from address_book_service group by city;
++------------+---------------+--------------+
+| city       | total_persons | sorted_names |
++------------+---------------+--------------+
+| Kashipur   |             1 | Aashish      |
+| Kasoli     |             1 | Kuldeep      |
+| Kurukshetr |             1 | Ravi         |
+| Moradabad  |             2 | Ashu,Mansi   |
++------------+---------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select city , count(*) as total_persons , GROUP_CONCAT(firstname ORDER BY firstname asc) as sorted_names from address_book_service group by city;
++------------+---------------+--------------+
+| city       | total_persons | sorted_names |
++------------+---------------+--------------+
+| Kashipur   |             1 | Aashish      |
+| Kasoli     |             1 | Kuldeep      |
+| Kurukshetr |             1 | Ravi         |
+| Moradabad  |             2 | Ashu,Mansi   |
++------------+---------------+--------------+
+4 rows in set (0.00 sec)
+
+UC9 - Ability to identify each Address Book with name and Type.
+- Here the type could Family, Friends,Profession, etc
+- Alter Address Book to add name and type
+
+mysql> alter table address_book_service add column type VARCHAR(50);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email               | type |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com  | NULL |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com   | NULL |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com    | NULL |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com      | NULL |
+|  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com | NULL |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+------+
+5 rows in set (0.00 sec)
+
+
+mysql> update address_book_service set type = 'Family' where firstname = 'Aashish';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update address_book_service set type = 'Family' where firstname = 'Ashu';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update address_book_service set type = 'Professional' where firstname = 'Ravi';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update address_book_service set type = 'Friend' where firstname = 'Mansi';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update address_book_service set type = 'Friend' where firstname = 'Kuldeep';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email               | type         |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com  | Family       |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com   | Family       |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com    | Friend       |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com      | Professional |
+|  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com | Friend       |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email,type) values ('Shonali','Dey','P Pocket','Meerut','UttarPradesh','671163','991230911','shona23@gmail.com','Proffesional');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email               | type         |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com  | Family       |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com   | Family       |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com    | Friend       |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com      | Professional |
+|  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com | Friend       |
+|  7 | Shonali   | Dey      | P Pocket         | Meerut     | UttarPradesh   | 671163 | 991230911    | shona23@gmail.com   | Proffesional |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> update address_book_service set firstname = 'Monali' where firstname = 'Shonali';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email               | type         |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com  | Family       |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com   | Family       |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com    | Friend       |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com      | Professional |
+|  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com | Friend       |
+|  7 | Monali    | Dey      | P Pocket         | Meerut     | UttarPradesh   | 671163 | 991230911    | shona23@gmail.com   | Proffesional |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+6 rows in set (0.00 sec)
+
+UC10 - Ability to get number of contact persons i.e. count by type
+
+mysql> select type, count(*) as count_by_type from address_book_service group by type;
++--------------+---------------+
+| type         | count_by_type |
++--------------+---------------+
+| Family       |             2 |
+| Friend       |             2 |
+| Professional |             1 |
+| Proffesional |             1 |
++--------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> update address_book_service set type = 'Professional' where firstname = 'Monali';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select type, count(*) as count_by_type from address_book_service group by type;
++--------------+---------------+
+| type         | count_by_type |
++--------------+---------------+
+| Family       |             2 |
+| Friend       |             2 |
+| Professional |             2 |
++--------------+---------------+
+3 rows in set (0.00 sec)
+
+
+mysql> update address_book_service set email = 'Mona399@yahoo.com' where firstname = 'Monali';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email               | type         |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com  | Family       |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com   | Family       |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com    | Friend       |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com      | Professional |
+|  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com | Friend       |
+|  7 | Monali    | Dey      | P Pocket         | Meerut     | UttarPradesh   | 671163 | 991230911    | Mona399@yahoo.com   | Professional |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> update address_book_service set email = 'mona399@yahoo.com' where firstname = 'Monali';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email               | type         |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com  | Family       |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com   | Family       |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com    | Friend       |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com      | Professional |
+|  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com | Friend       |
+|  7 | Monali    | Dey      | P Pocket         | Meerut     | UttarPradesh   | 671163 | 991230911    | mona399@yahoo.com   | Professional |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+---------------------+--------------+
+6 rows in set (0.00 sec)
+
+UC11 - Ability to add person to both Friend and Family
+
+mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email,type) values ('geeta','Singh','Q Pocket','Meerut','UttarPradesh','221163','991234526','geetasingh@gmail.com','Family');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into address_book_service(firstname,lastname,address,city,state,zip,phone_number,email,type) values ('Poonam','Kamboj','Vihar colony','Kalagarh','UttarPradesh','881116','123654526','kamboj@gmail.com','Friend');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from address_book_service;
++----+-----------+----------+------------------+------------+----------------+--------+--------------+----------------------+--------------+
+| id | firstname | lastname | address          | city       | state          | zip    | phone_number | email                | type         |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+----------------------+--------------+
+|  1 | Ashu      | Chauhan  | Jabdipur village | Moradabad  | Uttar Pradesh  | 123456 | 123456789    | ashuc306@gmail.com   | Family       |
+|  2 | Aashish   | Singh    | Vindhayavasani   | Kashipur   | Uttarakhand    | 123456 | 123456789    | abcd990@gmail.com    | Family       |
+|  3 | Kuldeep   | Rathore  | Shiv Colony      | Kasoli     | Madhya Pradesh | 896754 | 987654321    | jeevan@gmail.com     | Friend       |
+|  4 | Ravi      | Sharma   | Apna Ghar Colony | Kurukshetr | Harayana       | 951428 | 987591322    | ravi@gmail.com       | Professional |
+|  6 | Mansi     | Sahu     | Fanta Colony     | Moradabad  | UttarPradesh   | 675863 | 701234911    | mansisahu@gmail.com  | Friend       |
+|  7 | Monali    | Dey      | P Pocket         | Meerut     | UttarPradesh   | 671163 | 991230911    | mona399@yahoo.com    | Professional |
+|  8 | geeta     | Singh    | Q Pocket         | Meerut     | UttarPradesh   | 221163 | 991234526    | geetasingh@gmail.com | Family       |
+|  9 | Poonam    | Kamboj   | Vihar colony     | Kalagarh   | UttarPradesh   | 881116 | 123654526    | kamboj@gmail.com     | Friend       |
++----+-----------+----------+------------------+------------+----------------+--------+--------------+----------------------+--------------+
+8 rows in set (0.00 sec)
+***************************************************************************************************************************************************************************************
+
+/*An Entity-Relationship (ER) diagram is a graphical representation of the database schema that shows the entities, attributes, and relationships between them. ER diagrams are used in database design to help developers and stakeholders visualize the data model and understand the relationships between different data entities.
+
+In an ER diagram, entities are represented as rectangles, attributes are represented as ovals, and relationships are represented as diamond shapes. The lines connecting the shapes represent the relationships between the entities. ER diagrams can be used to model many different types of relationships, such as one-to-one, one-to-many, and many-to-many.
+
+ER diagrams are useful in the database design process because they can help identify missing or redundant data, clarify relationships between entities, and ensure that the data model is clear and easy to understand. They are commonly used in both the conceptual and logical design phases of database development.*/
+
+****************************************************************************************************************************************************************************************
