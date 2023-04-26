@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     Scanner object = new Scanner(System.in);
     AddressBook addressBook = new AddressBook();//created object of class Contacts
+    String nameOfAddressBook;
 
     public static void main(String args[]){
         Main main = new Main();//created object of Main class to call non-static method  of this class
@@ -30,7 +31,7 @@ public class Main {
                     break;
                 case 1:
                     System.out.println("Enter name of address book");
-                    String nameOfAddressBook = object.next();
+                    nameOfAddressBook = object.next();
                     addressBook.addContact(nameOfAddressBook);
                     System.out.println(" DONE !");
                     initiate();
@@ -65,7 +66,7 @@ public class Main {
                     addressBook.sortTheEntries();
                     break;
                 case 8:
-                    addressBook.readIntoFile();
+                    addressBook.readjsondatafile(nameOfAddressBook);
                     break;
                 default:
                     System.out.println("Invalid Input");

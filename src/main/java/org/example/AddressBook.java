@@ -1,15 +1,10 @@
 package org.example;
 
+import com.google.gson.Gson;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -76,45 +71,107 @@ class AddressBook {
             Address data = new Address(firstName , lastName , age , PersonAddress ,  city , state , zip , phoneNumber , email);
             map.put(firstName.concat(lastName), data);
             mapForAddressBook.put(nameOfAddressBook,contactList);
+            writejsondatafile(nameOfAddressBook);
 
-            writeIntoFile(nameOfAddressBook);
+            //writeIntoFile(nameOfAddressBook);
         }
     }
-    void  writeIntoFile(String filename){
+//    void  writeIntoFile(String nameOfAddressBook){
+//        File filePath = new File("E:\\Java\\IdeaProjectsREMAPPED\\AddressBook\\src\\com\\bridgelabz\\AddressBookFile.txt");
+//        try {
+//            FileWriter fileWriter = new FileWriter(filePath);
+//            fileWriter.write("Welcome to "+nameOfAddressBook);
+//            fileWriter.write(String.valueOf(contactList));
+//            fileWriter.close();
+//        }catch(Exception e){
+//            System.out.println("Oops !!!! Error!");
+//            e.printStackTrace();
+//        }
+//
+//    }
+//    void  readIntoFile(){
+//        File filePath = new File("E:\\Java\\IdeaProjectsREMAPPED\\AddressBook\\src\\com\\bridgelabz\\AddressBookFile.txt");
+//        int i ;
+//        try {
+//            FileReader fileReader = new FileReader(filePath);
+//            while ((i = fileReader.read() ) != -1){
+//                System.out.println((char) i );
+//                /*(char) i converts the integer value i to its corresponding character,
+//                and then System.out.println() prints this character to the console.
+//                This way, the contents of the file are printed to the console one character at a time
+//                as the while loop iterates through each character of the file.*/
+//            }
+//            fileReader.close();
+//        }catch(Exception e){
+//            System.out.println("Oops !!!! Error!");
+//            e.printStackTrace();
+//        }
+//
+//        void  writeIntoFile(String filename){
+//        try {
+//            FileWriter outputfile = new FileWriter("E:\\Java\\IdeaProjectsREMAPPED\\addressbookmaven\\src\\AddressBook.csv");
+//            CSVWriter writer = new CSVWriter(outputfile);
+//            ArrayList<String[]> csvdata = new ArrayList<>();
+//            csvdata.add(
+//                    new String[] { "First_name", "Last_name", "age" ,"address",  "city", "state", "zip","phoneNum", "email" });
+//            for (Address address : contactList) {
+//                csvdata.add(new String[] { address.getFirstName(), address.getLastName(), address.getAge(),address.getAddressOf(),address.getCity(), address.getState(),address.getZip(), address.getPhoneNumber(), address.getEmail() });
+//            }
+//            writer.writeAll(csvdata);
+//            writer.close();
+//        } catch ( IOException e) {
+//            System.out.println("Some error has occurred !");
+//            e.printStackTrace();
+//        }
+//
+//    }
+//    void  readIntoFile(){
+//        try {
+//            FileReader filereader = new FileReader("E:\\Java\\IdeaProjectsREMAPPED\\addressbookmaven\\src\\AddressBook.csv");
+//            CSVReader csvReader = new CSVReader(filereader);
+//            String[] nextRecord;
+//            // read data line by line
+//            while ((nextRecord = csvReader.readNext()) != null) {
+//                for (String cell : nextRecord) {
+//                    System.out.print(cell + "\t");
+//                }
+//                System.out.println();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+    public void writejsondatafile(String filename) {
+
         try {
-            FileWriter outputfile = new FileWriter("E:\\Java\\IdeaProjectsREMAPPED\\addressbookmaven\\src\\AddressBook.csv");
-            CSVWriter writer = new CSVWriter(outputfile);
-            ArrayList<String[]> csvdata = new ArrayList<>();
-            csvdata.add(
-                    new String[] { "First_name", "Last_name", "age" ,"address",  "city", "state", "zip","phoneNum", "email" });
-            for (Address address : contactList) {
-                csvdata.add(new String[] { address.getFirstName(), address.getLastName(), address.getAge(),address.getAddressOf(),address.getCity(), address.getState(),address.getZip(), address.getPhoneNumber(), address.getEmail() });
-            }
-            writer.writeAll(csvdata);
+            // create a writer
+            Writer writer = new FileWriter("E:\\Java\\IdeaProjectsREMAPPED\\addressbookmaven\\src"+filename);
+            // convert list to JSON File
+            new Gson().toJson(contactList, writer);
+            System.out.println("Done");
+            // close the writer
             writer.close();
-        } catch ( IOException e) {
-            System.out.println("Some error has occurred !");
-            e.printStackTrace();
-        }
 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
-    void  readIntoFile(){
+
+
+    public void readjsondatafile(String filename) {
+
+        Gson gson = new Gson();
         try {
-            FileReader filereader = new FileReader("E:\\Java\\IdeaProjectsREMAPPED\\addressbookmaven\\src\\AddressBook.csv");
-            CSVReader csvReader = new CSVReader(filereader);
-            String[] nextRecord;
-            // read data line by line
-            while ((nextRecord = csvReader.readNext()) != null) {
-                for (String cell : nextRecord) {
-                    System.out.print(cell + "\t");
-                }
-                System.out.println();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+            Address[] jsondata = gson.fromJson(new FileReader("E:\\Java\\IdeaProjectsREMAPPED\\addressbookmaven\\src" + filename), Address[].class);
+
+            System.out.println(gson.toJson(jsondata));
+        } catch (IOException e) {
+            System.err.println("File not found");
+        }
     }
+
     void sortTheEntries(){
         sortByCity();
         sortByState();
